@@ -22,13 +22,44 @@ def index():
 
 
  
-@app.route("/alumno")
+@app.route("/alumnos", methods=['GET', 'POST'])
 def alumno():
-     return render_template("alumnos.html")
+    create_form = forms.UserForm(request.form)
+    if request.method == 'POST':
+        alumnos = Alumnosdb(nombre=create_form.nombre.data,
+                           apellido=create_form.apellido.data, 
+                           email=create_form.email.data)
+        db.session.add(alumnos)
+        db.session.commit()
         
+        return redirect(url_for('index'))
+    return render_template("alumnos.html", form=create_form)
+        
+   
+   
+@app.route("/detalles", methods=['GET', 'POST'])
+def detalles():
+	create_form = forms.UserForm(request.form)
+
+	if request.method == 'GET':
+		id = request.args.get('id')
+
+		alumn1 = db.session.query(Alumnosdb).filter(Alumnosdb.id == id).first()
+		id = request.args.get('id')
+
+		nombre = alumn1.nombre
+		apellido = alumn1.apellido
+		email = alumn1.email
+		
+	return render_template("detalles.html", id=id, nombre=nombre, apellido=apellido, email=email) 
+       
 @app.errorhandler(404)
 def page_not_found(error):
 	return render_template('404.html'), 404
+
+
+
+    
 
 
 if __name__ == '__main__':
