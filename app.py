@@ -39,31 +39,38 @@ def alumno():
         return redirect(url_for('index'))
     return render_template("alumnos.html", form=create_form)
 
-@app.route("/modificar", methods=['GET', 'POST'])  
+@app.route("/modificar", methods=['GET', 'POST'])
 def modificar():
 	create_form = forms.UserForm(request.form)
 
 	if request.method == 'GET':
 		id = request.args.get('id')
+
 		alumn1 = db.session.query(Alumnosdb).filter(Alumnosdb.id == id).first()
+
 		create_form.id.data = request.args.get('id')
 		create_form.nombre.data = alumn1.nombre
 		create_form.apellidos.data = alumn1.apellidos
-		create_form.email.data = alumn1.email
 		create_form.telefono.data = alumn1.telefono
-
+		create_form.email.data = alumn1.email
+	
 	if request.method == 'POST':
-		id = request.args.get('id')
+		id = create_form.id.data
 		alumn1 = db.session.query(Alumnosdb).filter(Alumnosdb.id == id).first()
-		alumn1.id = create_form.id.data
+
+		alumn1.id = id
 		alumn1.nombre = create_form.nombre.data
 		alumn1.apellidos = create_form.apellidos.data
-		alumn1.email = create_form.email.data
 		alumn1.telefono = create_form.telefono.data
+		alumn1.email = create_form.email.data
+		
+		db.session.add(alumn1)
 		db.session.commit()
-		return redirect(url_for("index"))
-
+		
+		return redirect(url_for("index")) 
 	return render_template("modificar.html", form=create_form)
+
+
 	
 
    
