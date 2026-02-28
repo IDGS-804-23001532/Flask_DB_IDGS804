@@ -7,13 +7,15 @@ import forms
 from models import db
 from models import Alumnosdb
 from flask_migrate import Migrate
-
+from maestros.routes import maestros
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
+app.register_blueprint(maestros)
 db.init_app(app)	
 csrf = CSRFProtect()
 migrate = Migrate(app, db)
+
 
 @app.route("/")
 @app.route("/index")
