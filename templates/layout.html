@@ -67,7 +67,7 @@
           >
             <li>
               <a
-                href="#"
+                href="/Inicio"
                 class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                 aria-current="page"
                 >Home</a
@@ -75,23 +75,46 @@
             </li>
             <li>
               <a
-                href="#"
+                href="/cursos"
                 class="block py-2 pl-3 pr-4 text-gray-700 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >About</a
+                >Cursos</a
               >
             </li>
             <li>
               <a
-                href="#"
+                href="/inscripciones"
                 class="block py-2 pl-3 pr-4 text-gray-700 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >Services</a
+                >Inscripciones</a
               >
             </li>
             <li>
               <a
-                href="#"
+                href="/listarAlumnos"
                 class="block py-2 pl-3 pr-4 text-gray-700 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >Contact</a
+                >Alumnos</a
+              >
+            </li>
+
+            <li>
+              <a href="/maestros"
+              class="block py-2 pl-3 pr-4 text-gray-700 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                Maestros
+              </a>
+            </li>
+
+
+            <li>
+              <a
+                href="/grupos"
+                class="block py-2 pl-3 pr-4 text-gray-700 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >Grupos</a
+              >
+            </li>
+            <li>
+              <a
+                href="/BuscarAlumnos"
+                class="block py-2 pl-3 pr-4 text-gray-700 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >Buscar Alumnos</a
               >
             </li>
           </ul>
@@ -99,12 +122,30 @@
       </div>
     </nav>
 
-    <div class="flex items-center justify-center min-h-scree">
-      {%with messages=get_flashed_messages()%} {%if messages%} {%for message in
-      messages%}
-      <div class="alert alert-success">{{message}}</div>
-      {%endfor%} {%endif%} {%endwith%} {% block container%} {% endblock %}
-    </div>
+    <div class="max-w-4xl mx-auto mt-4 px-4">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="mb-3 rounded-lg border px-4 py-3
+        {% if category == 'error' %}
+            bg-red-100 border-red-500 text-red-700
+        {% elif category == 'success' %}
+            bg-green-100 border-green-500 text-green-700
+        {% elif category == 'warning' %}
+            bg-yellow-100 border-yellow-500 text-yellow-700
+        {% else %}
+            bg-blue-100 border-blue-500 text-blue-700
+        {% endif %}
+        ">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+  {% block container %}{% endblock %}
+</div>
+
 
     <div
       class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"

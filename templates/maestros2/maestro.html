@@ -10,10 +10,25 @@ macros %}
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 170px;
   "
+  novalidate
 >
   {{ form.csrf_token }}
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+  <div class="relative z-0 w-full mb-5 group">
+    {{macros.camposNuevos(form.matricula, class_="block py-2.5 px-0 w-full
+    text-sm text-heading bg-transparent border-0 border-b-2
+    border-default-medium appearance-none focus:outline-none focus:ring-0
+    focus:border-brand peer")}}
+    <!-- <input type="text" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " required /> -->
+    <label
+      for="matricula"
+      class="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+      >Matricula</label
+    >
+  </div>
   <div class="relative z-0 w-full mb-5 group">
     {{macros.camposNuevos(form.nombre, class_="block py-2.5 px-0 w-full text-sm
     text-heading bg-transparent border-0 border-b-2 border-default-medium
@@ -71,7 +86,7 @@ macros %}
   </button>
   <button
     type="button"
-    onclick="window.location.href = '/maestros';"
+    onclick="window.location.href = '/maestros'"
     class="text-gray-500 bg-white box-border border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
   >
     Return to list

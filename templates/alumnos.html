@@ -5,7 +5,7 @@
 
 
 
-<form class="max-w-md mx-auto" method="POST" action="/alumnos">
+<form class="max-w-md mx-auto" method="POST" action="/alumnos" style= "margin-top: 110px" novalidate>
     {{ form.csrf_token }}
     <input  type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="relative z-0 w-full mb-5 group">
@@ -33,6 +33,6 @@
    </div>
   
   <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
-  <button type="button" onclick="window.location.href='/index'"  class="text-gray-500 bg-white box-border border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Return to list</button>
+  <button type="button" onclick="window.location.href='/listarAlumnos'"  class="text-gray-500 bg-white box-border border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Return to list</button>
 </form>
 {%endblock%}

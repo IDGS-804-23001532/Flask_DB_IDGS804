@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block title %}Inicio — EduSistema{% endblock %}
+
+{% block container %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap');
+
+  * { font-family: 'Geist', sans-serif; }
+  .serif { font-family: 'Instrument Serif', Georgia, serif; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .rise { opacity: 0; animation: rise .5s ease forwards; }
+
+  .flowbite-card {
+    transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .flowbite-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(13, 27, 62, 0.15);
+  }
+</style>
+
+<div class="bg-[#f3f4f6] min-h-screen pb-12">
+
+  <header class="bg-white border-b border-gray-200 px-8 py-4 flex items-center justify-between rise">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-[#0d1b3e] flex items-center justify-center shadow-lg shadow-blue-900/20">
+        <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 20v-9l-4 1.125V20h4Zm0 0h8m-8 0V6.66667M16 20v-9l4 1.125V20h-4Zm0 0V6.66667M18 8l-6-4-6 4m5 1h2m-2 3h2"/>
+        </svg>
+      </div>
+      <span class="text-base font-bold text-[#0d1b3e] tracking-tight transition-all">EduSistema</span>
+    </div>
+    
+    <div class="flex items-center gap-4">
+      <span class="hidden sm:block text-[11px] font-medium text-gray-400 border-r border-gray-200 pr-4 uppercase tracking-widest" id="fecha-hoy"></span>
+      <div class="w-8 h-8 rounded-full bg-[#0d1b3e] flex items-center justify-center text-white text-[10px] font-bold ring-4 ring-blue-50">AD</div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-10 space-y-12">
+
+ 
+
+    <section class="space-y-8">
+      <div class="flex items-center gap-4 px-2">
+        <h2 class="text-[11px] font-black text-gray-400 uppercase tracking-[0.3em] whitespace-nowrap">Módulos del Sistema</h2>
+        <div class="h-px w-full bg-gray-200"></div>
+      </div>
+
+    
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 p-2">
+        {% for mod in modulos %}
+        <div class="flowbite-card bg-white border border-gray-200 rounded-2xl overflow-hidden flex flex-col group rise">
+          <div class="p-6 flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[#0d1b3e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
+                </svg>
+              </div>
+              <span class="inline-flex items-center bg-gray-50 border border-gray-200 text-[#0d1b3e] text-[10px] font-black px-3 py-1.5 rounded-xl uppercase tracking-widest">
+                {{ mod.tag }}
+              </span>
+            </div>
+            {% if mod.count is defined %}
+              <span class="text-[11px] bg-blue-50 text-blue-700 border border-blue-100 rounded-xl px-2 py-1 font-semibold">{{ mod.count }}</span>
+            {% endif %}
+          </div>
+          <div class="px-6 pb-6">
+            <a href="{{ mod.url }}">
+              <h5 class="text-2xl font-bold text-[#0d1b3e] mb-2 group-hover:text-blue-700 transition-colors tracking-tight">
+                {{ mod.label }}
+              </h5>
+            </a>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6 font-medium">
+              {{ mod.desc }}
+            </p>
+            <a href="{{ mod.url }}" class="inline-flex items-center justify-center w-full text-white bg-[#0d1b3e] hover:bg-black focus:ring-4 focus:ring-blue-100 shadow-xs font-bold rounded-xl text-[13px] px-6 py-3 transition-all group/btn uppercase tracking-widest">
+              Gestionar
+              <svg class="w-4 h-4 ms-2 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </section>
+
+   
+  </main>
+</div>
+
+<script>
+  // Actualizar fecha
+  document.getElementById('fecha-hoy').textContent =
+    new Date().toLocaleDateString('es-MX', { day:'numeric', month:'long', year:'numeric' });
+
+  // Animación suave de entrada
+  document.querySelectorAll('.rise').forEach((el, i) => {
+    el.style.animationDelay = (i * 0.1) + 's';
+  });
+</script>
+
+{% endblock %}

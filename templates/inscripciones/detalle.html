@@ -17,33 +17,29 @@
   </button>
 
   <div id="dropdown" class="z-10 bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-36 absolute right-2 top-12 hidden">
-    <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownButton">
-      <li><a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Edit</a></li>
-      <li><a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Export Data</a></li>
-      <li><a href="#" class="inline-flex items-center w-full p-2 text-fg-danger hover:bg-neutral-tertiary-medium rounded-md">Delete</a></li>
+    <ul class="p-2 text-sm text-body font-medium">
+      <li><a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Editar</a></li>
+      <li><a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Exportar</a></li>
+      <li><a href="#" class="inline-flex items-center w-full p-2 text-fg-danger hover:bg-neutral-tertiary-medium rounded-md">Eliminar</a></li>
     </ul>
   </div>
 
-  <div class="flex flex-col items-center text-center">
+  <div class="flex flex-col items-center">
     <img
       class="w-16 h-16 mb-4 rounded-full"
       style="max-width: 64px; max-height: 64px"
       src="{{ url_for('static', filename='img/user.jpg') }}"
-      alt="Maestro image"
+      alt="User image"
     />
     
-    <div class="space-y-1 mb-2">
-        <h5 class="text-xs font-bold text-blue-600 uppercase tracking-widest">M-{{matricula}}</h5>
-        <h5 class="text-xl font-semibold tracking-tight text-heading">{{nombre}} {{apellidos}}</h5>
-        <p class="text-[13px] font-medium text-gray-500 leading-tight">{{especialidad}}</p>
-        <p class="text-[11px] text-gray-400 italic">{{email}}</p>
-    </div>
-
+    <h5 class="mb-1 text-xl font-semibold tracking-tight text-heading uppercase text-[10px] opacity-60">ID: {{ inscripcion.id }}</h5>
+    <h5 class="mb-1 text-xl font-semibold tracking-tight text-heading">Alumno: {{ inscripcion.alumno.nombre }}</h5>
+    <h5 class="mb-4 text-xl font-semibold tracking-tight text-heading">Curso: {{ inscripcion.curso.nombre }}</h5>
     
-    <div class="flex mt-6 gap-4 w-full justify-center">
+    <div class="flex mt-4 gap-4 w-full justify-center">
       <a
-        href="/maestros"
-        class="inline-flex items-center justify-center w-full text-body bg-neutral-secondary-medium border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium rounded-base text-sm px-4 py-2.5 transition-all active:scale-95"
+        href="/inscripciones"
+        class="inline-flex items-center justify-center w-full text-body bg-neutral-secondary-medium border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium rounded-base text-sm px-4 py-2.5 transition-colors transition-transform active:scale-95"
       >
         <svg class="w-4 h-4 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>

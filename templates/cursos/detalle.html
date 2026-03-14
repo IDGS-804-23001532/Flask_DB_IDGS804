@@ -1,0 +1,110 @@
+{% extends "layout.html" %} {% block container%} {% import "_macros.html" as
+macros %}
+<div
+  class="relative bg-neutral-primary-soft max-w-xs w-full p-6 border border-default rounded-base shadow-xs " style="margin-left: 560px; margin-top:100px"
+>
+  <button
+    id="dropdownButton"
+    data-dropdown-toggle="dropdown"
+    class="absolute top-2 end-2 text-body hover:text-heading bg-neutral-primary-soft box-border border border-transparent hover:bg-neutral-tertiary focus:ring-4 focus:ring-neutral-tertiary rounded-base p-1.5 focus:outline-none"
+    type="button"
+  >
+    <span class="sr-only">Open dropdown</span>
+    <svg
+      class="w-6 h-6"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-width="3"
+        d="M6 12h.01m6 0h.01m5.99 0h.01"
+      />
+    </svg>
+  </button>
+  <!-- Dropdown menu -->
+  <div
+    id="dropdown"
+    class="z-10 bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-36 block hidden"
+  >
+    <ul
+      class="p-2 text-sm text-body font-medium"
+      aria-labelledby="dropdownButton"
+    >
+      <li>
+        <a
+          href="#"
+          class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md"
+          >Edit</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md"
+          >Export Data</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          class="inline-flex items-center w-full p-2 text-fg-danger hover:bg-neutral-tertiary-medium rounded-md"
+          >Delete</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="max-w-md mx-auto bg-white border border-gray-100 rounded-[2.5rem] p-8 shadow-xl shadow-blue-900/5 rise">
+    <div class="flex flex-col items-center">
+        <div class="relative p-1 rounded-full bg-gradient-to-tr from-[#0d1b3e] to-blue-400 mb-5">
+            <img class="w-16 h-16 mb-4 rounded-full" style="max-width: 64px; max-height: 64px"src="static/img/user.jpg"alt="Bonnie image"/>
+        </div>
+
+        <span class="bg-blue-50 text-[#0d1b3e] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-[0.2em] mb-4 border border-blue-100">
+            ID: {{id}}
+        </span>
+
+        <div class="text-center space-y-4 w-full px-4">
+            <div>
+                <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Nombre del Alumno</p>
+                <h5 class="text-2xl font-bold text-[#0d1b3e] leading-tight">{{nombre}}</h5>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Descripción</p>
+                <p class="text-sm text-gray-600 leading-relaxed italic">
+                    "{{descripcion}}"
+                </p>
+            </div>
+
+            <div class="flex items-center justify-center gap-2 py-2 border-t border-b border-gray-50">
+                <span class="text-lg"></span>
+                <div class="text-left">
+                    <p class="text-[10px] text-gray-400 uppercase font-bold leading-none">Maestro Asignado</p>
+                    <p class="text-sm font-semibold text-[#0d1b3e]">
+                        {{ maestro_id.nombre if maestro_id else 'Sin maestro asignado' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 w-full flex justify-center" style:"margin-top:20px">
+            <a href="/cursos" 
+               class="inline-flex items-center justify-center w-full sm:w-auto text-gray-500 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-200 shadow-sm font-bold rounded-2xl text-[11px] uppercase tracking-widest px-8 py-3.5 transition-all outline-none">
+                <svg class="w-4 h-4 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Regresar
+            </a>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

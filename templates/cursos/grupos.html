@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block container %}
+<div class="py-24 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="bg-neutral-primary-soft border border-default rounded-base p-6 shadow-xs">
+    <h2 class="text-xl font-semibold text-heading mb-4">Seleccionar Curso</h2>
+    <form method="GET" action="/grupos" class="space-y-4">
+      <div>
+        <label for="curso_id" class="block text-sm text-body mb-2">Curso</label>
+        <select id="curso_id" name="curso_id" class="block w-full border border-default rounded-base p-2.5 text-body focus:outline-none focus:ring-2 focus:ring-brand-medium">
+          <option value="">-- Selecciona un curso --</option>
+          {% for c in cursos %}
+            <option value="{{ c.id }}" {% if selected_id and selected_id|int == c.id %}selected{% endif %}>
+              {{ c.nombre }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="w-full md:w-auto text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" style="margin-top:20px">
+        Ver alumnos
+      </button>
+    </form>
+  </div>
+  <div class="bg-neutral-primary-soft border border-default rounded-base p-6 shadow-xs">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-heading">Alumnos del Curso</h2>
+      {% if selected_curso %}
+      <span class="inline-flex items-center rounded-full bg-neutral-secondary-medium text-heading text-xs px-3 py-1">{{ alumnos|length }} alumnos</span>
+      {% endif %}
+    </div>
+    {% if selected_curso %}
+      <div class="mb-4">
+        <p class="text-body"><span class="font-medium">Curso:</span> {{ selected_curso.nombre }}</p>
+        <p class="text-body"><span class="font-medium">Maestro:</span> {{ selected_curso.maestro.nombre }}</p>
+        <p class="text-body mt-2"><span class="front-medium">Descripción del curso: </span>{{ selected_curso.descripcion }}</p>
+      </div>
+      <ul class="divide-y divide-default">
+        <p class="text-body"><span class="font-medium"> Alumnos en el curso:</span>
+        {% for alumno in alumnos %}
+          <li class="py-2 text-body">{{ alumno.nombre }} {{ alumno.apellidos }}</li>
+        {% else %}
+          <li class="py-2 text-body">Sin alumnos inscritos</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-body">Selecciona un curso para ver sus alumnos.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

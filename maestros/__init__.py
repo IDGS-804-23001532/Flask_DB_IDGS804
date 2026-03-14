@@ -1,3 +1,5 @@
+from string import Template
+
 from flask import Blueprint
 
 # Importamos los archivos necesarios para el funcionamiento del blueprint

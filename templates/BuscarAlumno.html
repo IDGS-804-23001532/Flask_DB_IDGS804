@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block container %}
+<div class="py-24 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+
+  <!-- Selección de Alumno -->
+  <div class="bg-neutral-primary-soft border border-default rounded-base p-6 shadow-xs">
+    
+    <h2 class="text-xl font-semibold text-heading mb-4">Seleccionar Alumno</h2>
+
+    <form method="GET" action="/BuscarAlumnos" class="space-y-4">
+
+      <div>
+        <label for="alumno_id" class="block text-sm text-body mb-2">Alumno</label>
+
+        <select id="alumno_id" name="alumno_id"
+        class="block w-full border border-default rounded-base p-2.5 text-body focus:outline-none focus:ring-2 focus:ring-brand-medium">
+
+          <option value="">-- Selecciona un alumno --</option>
+
+          {% for a in alumnos_db %}
+            <option value="{{ a.id }}" {% if selected_id and selected_id|int == a.id %}selected{% endif %}>
+              {{ a.nombre }} {{ a.apellidos }}
+            </option>
+          {% endfor %}
+
+        </select>
+      </div>
+
+      <button type="submit"
+      class="w-full md:w-auto text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+      style="margin-top:20px">
+        Ver cursos
+      </button>
+
+    </form>
+  </div>
+
+
+  <!-- Resultados -->
+  <div class="bg-neutral-primary-soft border border-default rounded-base p-6 shadow-xs">
+
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-semibold text-heading">Cursos del Alumno</h2>
+
+      {% if alumno_seleccionado %}
+      <span class="inline-flex items-center rounded-full bg-neutral-secondary-medium text-heading text-xs px-3 py-1">
+        {{ inscripciones|length }} cursos
+      </span>
+      {% endif %}
+    </div>
+
+
+    {% if alumno_seleccionado %}
+
+      <div class="mb-4">
+        <p class="text-body">
+          <span class="font-medium">Alumno:</span>
+          {{ alumno_seleccionado.nombre }}
+        </p>
+
+        <p class="text-body">
+          <span class="font-medium">Matrícula:</span>
+          {{ alumno_seleccionado.id }}
+        </p>
+      </div>
+
+
+      <ul class="divide-y divide-default">
+
+        <p class="text-body mb-2">
+          <span class="font-medium">Cursos inscritos:</span>
+        </p>
+
+        {% for insc in inscripciones %}
+
+          <li class="py-2 text-body">
+            {{ insc.curso.nombre }} —
+            <span class="text-sm">
+              {{ insc.curso.maestro.nombre if insc.curso.maestro else 'Profesor por asignar' }}
+            </span>
+          </li>
+
+        {% else %}
+
+          <li class="py-2 text-body">
+            No hay cursos inscritos para este alumno
+          </li>
+
+        {% endfor %}
+
+      </ul>
+
+    {% else %}
+
+      <p class="text-body">
+        Selecciona un alumno para ver sus cursos.
+      </p>
+
+    {% endif %}
+
+  </div>
+
+</div>
+{% endblock %}
